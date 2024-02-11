@@ -1,6 +1,16 @@
 name: 'Terraform'
 
 on:
+  workflow_dispatch:
+    inputs:
+      terraform_action:
+        description: 'Select Terraform action'
+        required: true
+        default: 'apply'
+        options:
+          - 'apply'
+          - 'destroy'
+          required: true
   push:
     branches: [ "main" ]
 
@@ -34,10 +44,20 @@ jobs:
           tf_actions_working_dir: '.'
           tf_actions_comment: true
 
-      - name: Terraform apply    
+      - name: Terraform apply
+        if: ${{ github.event.inputs.terraform_action == 'apply' }}    
         uses: hashicorp/setup-terraform@v2
         with:
           tf_actions_version: 0.14.3
-          tf_actions_subcommand: 'apply'
+          tf_actions_subcommand: ${{ github.event.inputs.terraform_action }}
+          tf_actions_working_dir: '.'
+          tf_actions_comment: true
+      
+      - name: Terraform destroy
+        if: ${{ github.event.inputs.terraform_action == 'destroy' }}    
+        uses: hashicorp/setup-terraform@v2
+        with:
+          tf_actions_version: 0.14.3
+          tf_actions_subcommand: ${{ github.event.inputs.terraform_action }}
           tf_actions_working_dir: '.'
           tf_actions_comment: true
