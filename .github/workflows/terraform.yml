@@ -16,10 +16,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Terraform init
-        uses: hashicorp/terraform-github-action@v3
+        uses: hashicorp/setup-terraform@v2
         with:
           tf_actions_version: 0.14.3
           tf_actions_subcommand: 'init'
@@ -27,7 +27,7 @@ jobs:
           tf_actions_comment: true
 
       - name: Terraform plan    
-        uses: hashicorp/terraform-github-action@v3
+        uses: hashicorp/setup-terraform@v2
         with:
           tf_actions_version: 0.14.3
           tf_actions_subcommand: 'plan'
@@ -35,7 +35,7 @@ jobs:
           tf_actions_comment: true
 
       - name: Terraform apply    
-        uses: hashicorp/terraform-github-action@v3
+        uses: hashicorp/setup-terraform@v2
         with:
           tf_actions_version: 0.14.3
           tf_actions_subcommand: 'apply'
