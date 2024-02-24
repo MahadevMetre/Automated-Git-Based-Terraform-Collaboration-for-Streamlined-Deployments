@@ -1,0 +1,1 @@
+Git repository for Terraform scripts, implement a branching strategy for different environments, and integrate a CI/CD pipeline to automate Terraform deployments upon code commits. This will enhance collaboration, version control, and deployment efficiency in the infrastructure-as-code (IaC) workflow.
